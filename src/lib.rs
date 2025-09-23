@@ -49,5 +49,6 @@ impl Plugin for IterationControlPlugin {
         app.add_systems(Update, systems::counter_users::print_limiter_system);
         app.add_systems(Update, systems::counter_users::spawn_limiter_system);
         app.add_systems(Update, systems::counter_reset::counter_reset_demo);
+        app.add_systems(Update, systems::once_static::once_static_system);
     }
 }
