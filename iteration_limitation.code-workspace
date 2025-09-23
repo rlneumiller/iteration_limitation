@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.inlayHints.enabled": "offUnlessPressed",
+		"editor.semanticHighlighting.enabled": false,
+		"[rust]": {
+			"editor.semanticHighlighting.enabled": false
+		},
+		"workbench.colorCustomizations": {
+			"terminal.background": "#000000"
+		},
+	}
+}

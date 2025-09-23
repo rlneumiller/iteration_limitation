@@ -1,0 +1,22 @@
+[package]
+name = "iteration_limitation"
+version = "0.1.0"
+edition = "2024"
+description = "A Bevy library providing iteration control systems for run-once execution, iteration limiting, and multi-counter management"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rlneumiller/iteration_limitation"
+keywords = ["bevy", "gamedev", "iteration", "control", "systems"]
+categories = ["game-development"]
+authors = ["Arrel <1020771+rlneumiller@users.noreply.github.com>"]
+homepage = "https://github.com/rlneumiller/iteration_limitation/discussions"
+
+[dependencies]
+bevy = "0.16.1"
+
+[lib]
+name = "iteration_limitation"
+path = "src/lib.rs"
+
+[[bin]]
+name = "iteration_limitation"
+path = "src/main.rs"
