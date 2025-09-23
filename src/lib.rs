@@ -1,4 +1,4 @@
-//! 💬 For questions or feedback, visit: https://github.com/rlneumiller/iteration_limitation/discussions
+//! 💬 For questions or feedback, visit: <https://github.com/rlneumiller/iteration_limitation/discussions>
 
 use bevy::prelude::*;
 use crate::resources::*;
@@ -15,6 +15,7 @@ pub mod prelude {
 ///
 /// This plugin includes systems for:
 /// - Run-once execution
+/// - Global once-time initialization using std::sync::Once
 /// - Iteration limiting
 /// - Multi-counter management
 /// - Conditional execution based on counters

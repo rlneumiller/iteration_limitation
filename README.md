@@ -1,6 +1,6 @@
 # iteration_limitation
 
-A reusable Bevy library providing various iteration control systems including run-once execution, iteration limiting, and multi-counter management.
+A reusable Bevy library providing various iteration control systems including run-once execution, iteration limiting, multi-counter management, and global once-time initialization.
 
 ## Installation
 
@@ -49,6 +49,7 @@ fn main() {
 
     // Add systems
     app.add_systems(Update, run_once::run_once_system);
+    app.add_systems(Update, once_static::once_static_system);
     app.add_systems(Update, iteration_limiter::iteration_limiter_system);
     // ... add other systems as needed
 
@@ -61,6 +62,7 @@ fn main() {
 This project includes several systems for controlling execution frequency and iteration limits:
 
 - **Run Once System**: Executes a system only once during the application lifetime
+- **Global Once System**: Uses `std::sync::Once` for global one-time initialization across the entire program
 - **Iteration Limiter**: Limits the number of times a behavior can occur
 - **Limited Print**: Demonstrates conditional printing based on iteration count
 - **Multi Counter**: Manages multiple independent counters with different limits
@@ -100,6 +102,50 @@ app.add_systems(Update, my_system.run_if(should_run));
 ```
 
 Where `should_run` checks the `HasRun` state.
+
+## Global Once System
+
+For global one-time initialization that persists across the entire program lifetime, use the `once_static_system` which leverages `std::sync::Once`.
+
+### How the Global Once System Works
+
+Unlike the run-once system that uses Bevy resources (scoped to the app), the global once system uses a static `std::sync::Once` instance for truly global initialization:
+
+```rust
+static ONESHOT_A: std::sync::Once = std::sync::Once::new();
+ONESHOT_A.call_once(|| {
+    println!("Demonstrating call_once");
+});
+```
+
+### Key Differences from Run Once System
+
+- **Scope**: Global across the entire program vs. per-app instance
+- **Persistence**: Survives app restarts and recreations
+- **Thread Safety**: Guaranteed by `std::sync::Once`
+- **Use Case**: Perfect for initializing global state, logging setup, or one-time program-wide configuration
+
+### Integration
+
+The system is automatically included when using `IterationControlPlugin`. The closure will execute exactly once, even if:
+
+- The Bevy app is restarted multiple times
+- Multiple Bevy apps are created in the same program
+- The system runs on different threads
+
+### When to Use
+
+Choose `once_static_system` when you need:
+
+- Global initialization that affects the entire program
+- Thread-safe one-time setup
+- Initialization that should persist beyond individual Bevy app lifecycles
+
+Choose `run_once_system` when you need:
+
+- Per-app initialization
+- Initialization that should reset when the app restarts
+- Bevy-specific resource management
 
 ## Iteration Limiting System
 
@@ -246,6 +292,7 @@ The `examples/` directory contains runnable examples demonstrating each system t
 
 ```bash
 cargo run --example run_once_example
+cargo run --example once_static_example
 cargo run --example iteration_limiter_example
 cargo run --example limited_print_example
 cargo run --example multi_counter_example
