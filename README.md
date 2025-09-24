@@ -291,7 +291,8 @@ This approach is ideal when you need different iteration limits for different ga
 The `examples/` directory contains runnable examples demonstrating each system type. You can run them with:
 
 ```bash
-cargo run --example run_once_example
+cargo run --example has_run_example
+cargo run --example run_once_state_example
 cargo run --example once_static_example
 cargo run --example iteration_limiter_example
 cargo run --example limited_print_example

@@ -6,6 +6,6 @@ pub fn should_run(has_run: Res<HasRun>) -> bool {
 }
 
 fn main() {
-    println!("This is an example of run-once logic.");
+    println!("This is an example demonstrating the use of single global run-once logic.");
     println!("Use should_run as a run condition to execute a system only once.");
 }

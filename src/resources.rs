@@ -5,6 +5,13 @@ use std::collections::HashMap;
 pub struct HasRun(pub bool);
 
 #[derive(Resource)]
+pub struct RunOnceState {
+    pub run_once_state_a: bool,
+    pub run_once_state_b: bool,
+    // Add more fields as needed for other one-time actions
+}
+
+#[derive(Resource)]
 pub struct MaxIterations(pub usize);
 
 #[derive(Resource)]

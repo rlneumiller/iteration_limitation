@@ -9,6 +9,7 @@ pub mod run_once;
 #[cfg(test)]
 mod tests {
     mod run_once_tests;
+    mod run_once_state_tests;
     mod once_static_tests;
     mod iteration_limiter_tests;
     mod limited_print_tests;
